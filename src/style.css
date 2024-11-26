@@ -16,15 +16,17 @@ body {
 }
 
 #terrain {
-    background-image: url('../assets/images/terrain-removebg-preview.png');
+    background-image: url('../assets/images/stadium_background.webp');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    height: 45rem;
 }
 
 .player {
     background-image: url('../assets/images/card.png');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
+    /*width: 10rem;
+    height: 10rem;*/
 }
