@@ -23,7 +23,8 @@ body {
     height: 45rem;
 }
 
-.attack {
+.player {
     background-image: url('../assets/images/card.png');
     background-repeat: no-repeat;
+    background-size: contain;
 }
