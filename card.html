@@ -9,34 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body class="flex justify-center items-center h-screen">
-    <div class="relative w-44 h-52">
+    <div class="relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20">
         <img src="./assets/images/card.png" alt="card" class=" w-full h-full object-cover rounded-lg">
         <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4">
-            <div class="flex items-center justify-between w-28 mt-5">
-                <div>
-                    <span class="text-lg font-bold">90</span>
-                    <span class="text-lg">ST</span>
+            <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
+                <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
+                    <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">90</span>
+                    <span class="text-lg max-md:text-sm max-sm:text-[8px] max-sm:h-4">ST</span>
                     <div class="space-y-1">
-                        <img src="https://cdn.sofifa.net/flags/ar.png" alt="nationality" class="w-5 h-5">
-                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="club" class="w-5 h-5">
+                        <img src="https://cdn.sofifa.net/flags/ar.png" alt="nationality" class="w-5 h-5 max-sm:w-2 max-sm:h-2">
+                        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="club" class="w-5 h-5 max-sm:w-2 max-sm:h-2">
                     </div>
                 </div>
-                <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="player" class="w-28 -mt-5">
+                <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="player" class="w-28 -mt-5 max-sm:w-16 max-sm:h-12 object-contain">
             </div>
-            <span class="font-semibold">Lionel Messi</span>
-            <div class="text-sm -mt-1">
-                <span>AT</span>
-                <span>SP</span>
-                <span>DR</span>
-                <span>DF</span>
-                <span>EN</span>
-            </div>
-            <div class="-mt-1">
-                <span>00</span>
-                <span>11</span>
-                <span>22</span>
-                <span>33</span>
-                <span>44</span>
+            <div class="max-sm:-mt-3">
+                <span class="font-semibold max-md:text-sm max-sm:text-[8px]">Lionel Messi</span>
+                <div class="text-sm max-md:text-xs max-sm:text-[6px] -mt-1">
+                    <span>AT</span>
+                    <span>SP</span>
+                    <span>DR</span>
+                    <span>DF</span>
+                    <span>EN</span>
+                </div>
+                <div class="-mt-1 max-md:text-xs max-sm:text-[7px]">
+                    <span>00</span>
+                    <span>11</span>
+                    <span>22</span>
+                    <span>33</span>
+                    <span>44</span>
+                </div>
             </div>
         </div>
     </div>
