@@ -28,3 +28,12 @@ body {
     background-size: contain;
     background-position: center;
 }
+
+.display-card {
+    background-image: url('../assets/images/card.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 250px;
+    height: 250px;
+}
