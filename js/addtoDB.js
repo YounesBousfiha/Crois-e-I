@@ -97,23 +97,23 @@ document.addEventListener('DOMContentLoaded' , function () {
                 if(this.value == '1') {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="passing">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="passing">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
                         </div>
                     `
                 } else if (this.value == '2') {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="diving">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="handling">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="kicking">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
-                            <input class="border-2 rounded-lg px-2 w-36  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="diving">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="handling">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="kicking">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
+                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
                         </div>
                     `
                 }
