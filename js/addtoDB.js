@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         if (obj.position == 'GK') {
             newCard = `
             <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
-                <p id="remove" class="text-end text-2xl h-1">&times</p>
+                <button id="remove" class="text-end text-2xl h-1 remove">&times</button>
                 <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                 <div class="p-2 space-y-1">
                     <p class="text-lg font-bold text-center name">${obj.name}</p>
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         } else {
             newCard = `
             <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
-                <p id="remove" class="text-end text-2xl h-1">&times</p>
+                <button id="remove" class="text-end text-2xl h-1 remove">&times</button>
                 <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                 <div class="p-2 space-y-1">
                     <p class="font-bold text-center name">${obj.name}</p>
@@ -304,35 +304,42 @@ document.addEventListener('DOMContentLoaded' , function () {
         `;
         }
 
-        function removePlayer(element) {
-            console.log(element);
-        }
-
         playercontainer.insertAdjacentHTML('afterbegin', newCard);
     }
 
-    
+    document.getElementById('playerContainer').addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove')) {
+            removePlayer(event);
+        }
+    });
+
+    function removePlayer(event) {
+        let storage = JSON.parse(localStorage.getItem('playerDB')) || []
+        let tmp = []
+        let item = event.target.parentElement;
+        let itemName = item.querySelector('.name').textContent;
+        console.log(itemName);
+
+        storage.forEach((element) => {
+            if(element.name != itemName) {
+                tmp.push(element);
+            }
+        });
+
+        storage = tmp;
+
+        if(item) {
+            item.remove();
+        } else {
+            alert('no card Exist!');
+        }
+
+        localStorage.setItem('playerDB', JSON.stringify(storage));
+    }
+
     function clearInputs(event) {
         console.log('canceled!');
     }
-
-    /*addBtn.addEventListener('click', () => {
-        let playerContainer = document.getElementById('playerContainer');
-
-
-
-
-        // call a function show form
-        // select player from API or Fill Form for new One
-        // take on consideration the state of Player & Goal Keeper
-        // inside that function call a validation form
-        // return Object Contain all the validated Data
-        // place all the element inside the Card
-        let tempdiv = addBtn.cloneNode(true);
-        console.log(tempdiv);
-
-        playerContainer.insertAdjacentElement('beforebegin', tempdiv);
-    });*/
 
     document.getElementById('addNewPlayer').addEventListener('click', (event) => {
         let modal = document.getElementById('modal');
