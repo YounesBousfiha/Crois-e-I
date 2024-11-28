@@ -16,9 +16,15 @@ document.addEventListener('DOMContentLoaded' , function () {
 
         function fetchFromAPI() {
             let selectPlayer = document.createElement('select');
+            let BtnContainer = document.createElement('div');
+            let addDiv = document.createElement('div');
+            let cancelDiv =  document.createElement('div');
+            let ajouteBtn = document.createElement('button');
+            let cancelBtn = document.createElement('button');
+
             selectPlayer.classList.add('px-5', 'py-1', 'rounded-lg', 'w-96', 'h-16', 'text-2xl');
-    
-            fetch("./js/players.json")
+            
+            fetch("../js/players.json")
             .then(res => res.json())
             .then(data => {
                 data.players.forEach((obj, index) => {
@@ -32,6 +38,20 @@ document.addEventListener('DOMContentLoaded' , function () {
                     tmpOption.setAttribute('data-club', obj.club);
                     tmpOption.setAttribute('data-logo', obj.logo);
                     tmpOption.setAttribute('data-rating', obj.rating);
+
+                    BtnContainer.classList.add('flex', 'justify-center');
+                    ajouteBtn.classList.add('text-4xl', 'border-2', 'px-2', 'rounded-lg', 'text-white', 'bg-green-400', 'hover:bg-green-700', 'hover:duration-500');
+                    ajouteBtn.id = "add";
+                    cancelBtn.classList.add('text-4xl', 'border-2', 'px-2', 'rounded-lg', 'text-white', 'bg-red-400', 'hover:bg-red-700', 'hover:duration-500');
+                    cancelBtn.id = "cancel";
+                    ajouteBtn.textContent = "Ajouter";
+                    cancelBtn.textContent = "Cancel";
+
+                    addDiv.appendChild(ajouteBtn);
+                    cancelDiv.appendChild(cancelBtn);
+
+                    BtnContainer.appendChild(addDiv);
+                    BtnContainer.appendChild(cancelBtn);
                     
                     if(obj.position == "GK") {
                         tmpOption.setAttribute('data-diving', obj.diving);
@@ -52,6 +72,10 @@ document.addEventListener('DOMContentLoaded' , function () {
                 });
             });
             dynamicFields.appendChild(selectPlayer);
+            dynamicFields.appendChild(BtnContainer);
+
+            ajouteBtn.addEventListener('click', (event) => operations(event));
+            cancelBtn.addEventListener('click', (event) => operations(event));
         }
 
         function fillViaFrom() {
@@ -87,8 +111,20 @@ document.addEventListener('DOMContentLoaded' , function () {
                     </div>
                     <div id="stats-form">
                     </div>
+
+                    <div class="flex">
+                        <div>
+                            <button id="add" class="text-4xl border-2 px-2 rounded-lg text-white bg-green-400 hover:bg-green-700 hover:duration-500" type="submit" >Ajouter</button>
+                        </div>
+                        <div>
+                            <button id="cancel" class="text-4xl border-2 px-2 rounded-lg text-white bg-red-400 hover:bg-red-700 hover:duration-500" type="submit" >Cancel</button>
+                        </div>
+                    </div>
                 </div>`;
             dynamicFields.innerHTML = formHTML;
+
+            document.getElementById('add').addEventListener('click', (event) => operations(event));
+            document.getElementById('cancel').addEventListener('click', (event) => operations(event));
 
             let stats = document.getElementById('playerType');
             stats.addEventListener('change',  function () {
@@ -116,14 +152,25 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
                         </div>
                     `
-                }
-
-                
-            })
+                }             
+            });
 
         }
-
     });
+
+
+    function operations(event) {
+        // function to controle the add & cancel from the modal
+        console.log(event.target);
+    }
+
+    function ajouteNewPlayer() {
+
+    }
+
+    function removePlayer() {
+
+    }
 
     /*addBtn.addEventListener('click', () => {
         let playerContainer = document.getElementById('playerContainer');
@@ -143,4 +190,15 @@ document.addEventListener('DOMContentLoaded' , function () {
         playerContainer.insertAdjacentElement('beforebegin', tempdiv);
     });*/
 
+    document.getElementById('addNewPlayer').addEventListener('click', (event) => {
+        let modal = document.getElementById('modal');
+
+        modal.classList.remove('hidden');
+
+        window.onclick =  (event) => {
+            if(event.target == modal) {
+                modal.classList.add('hidden');
+            }
+        }
+    });
 })

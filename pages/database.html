@@ -9,6 +9,21 @@
 </head>
 <body>
     <header>
+        <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+            <form id="playerForm" class="bg-white flex flex-col items-center justify-center space-y-3 rounded-lg py-3 px-3" action="#">
+                <h3 class="text-2xl">Ajoute Un Joueur</h3>
+                <div>
+                    <select id="sourceSelect" class="px-5 py-1 rounded-lg w-96 h-16 text-2xl">
+                        <option value="0">Select Votre Source</option>
+                        <option value="1">Public API</option>
+                        <option value="2">Create a New Player</option>
+                    </select>
+                </div>
+                <div id="dynamicFields">
+                </div>
+            </form>
+        </div>
+
         <div class="mx-0 px-4">
             <nav class="flex justify-between mt-3 px-4 navbar">
                 <div class="w-20 flex items-center">
@@ -73,7 +88,8 @@
         <div class="flex justify-center">
             <div id="playerContainer" class="grid grid-cols-7 place-items-center py-5 px-5 max-lg:grid-cols-6 max-md:grid-cols-5 max-sm:grid-cols-2">
 
-               <!--<div class="w-44 h-72 bg-white rounded-lg shadow-md p-4 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+              <!-- <div class="w-44 h-72 bg-white rounded-lg shadow-md p-4 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+                    <p class="text-end text-2xl h-1">&times</p>
                     <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                     <div class="p-2 space-y-1">
                         <p class="text-lg font-bold text-center">Lionel Messi</p>
