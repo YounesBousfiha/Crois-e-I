@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded' , function () {
     let addBtn = document.getElementById('addNewPlayer');
 
+    LoadFromLocalStorage();
+
+    function LoadFromLocalStorage() {
+        let data = JSON.parse(localStorage.getItem('playerDB')) || [];
+        data.forEach((element) => {
+            createPlayerCard(element);
+        });
+    }
+
     document.getElementById('sourceSelect').addEventListener('change', function() {
         let dynamicFields = document.getElementById('dynamicFields');
         dynamicFields.innerHTML = '';
@@ -35,6 +44,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                     tmpOption.setAttribute('data-photo', obj.photo);
                     tmpOption.setAttribute('data-position', obj.position);
                     tmpOption.setAttribute('data-nationality', obj.nationality);
+                    tmpOption.setAttribute('data-flag', obj.flag);
                     tmpOption.setAttribute('data-club', obj.club);
                     tmpOption.setAttribute('data-logo', obj.logo);
                     tmpOption.setAttribute('data-rating', obj.rating);
@@ -183,7 +193,7 @@ document.addEventListener('DOMContentLoaded' , function () {
 
     function ajouteNewPlayer(event) {
         let formtype = document.getElementById('sourceSelect').value;
-        let storage = JSON.parse(localStorage.getItem('palyers')) || [];
+        let storage = JSON.parse(localStorage.getItem('playerDB')) || [];
         let form = event.target.parentElement.parentElement.parentElement;
         let data = {}
 
@@ -191,7 +201,7 @@ document.addEventListener('DOMContentLoaded' , function () {
             let player =  form.querySelector('option:checked');
             data.name = player.dataset.name;
             data.photo = player.dataset.photo;
-            data.nationality = player.dataset.nationality;
+            data.flag = player.dataset.flag;
             data.club = player.dataset.club;
             data.logo = player.dataset.logo;
             data.rating = player.dataset.rating;
@@ -218,22 +228,90 @@ document.addEventListener('DOMContentLoaded' , function () {
             inputs.forEach((input) => {
                 data[input.id] = input.value;
             });
-
-            console.log(data);
         }
+        // Perform a Vadication before push into Local Sotrage 
         storage.push(data);
-        localStorage.setItem('palyers', JSON.stringify(storage));
+        localStorage.setItem('playerDB', JSON.stringify(storage));
         createPlayerCard(data);
     }
 
     function createPlayerCard(obj) {
-        // recoit player data
-        // create the common element
-        // fill element based on obj.position
+        let playercontainer = document.getElementById('playerContainer');
+        let newCard;
+        if (obj.position == 'GK') {
+            newCard = `
+            <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+                <p id="remove" class="text-end text-2xl h-1">&times</p>
+                <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
+                <div class="p-2 space-y-1">
+                    <p class="text-lg font-bold text-center name">${obj.name}</p>
+                    <div class="flex justify-evenly">
+                        <span class="text-gray-600 text postion">${obj.position}</span>
+                        <span class="text-gray-600 rating">${obj.rating}</span>
+                        <img src="${obj.flag}" alt="nation" width="20">
+                        <img src="${obj.logo}" alt="club" width="20">
+                    </div>
+                    <div class="flex space-x-1">
+                        <span class="text-gray-600">DI</span>
+                        <span class="text-gray-600">HA</span>
+                        <span class="text-gray-600">KI</span>
+                        <span class="text-gray-600">RE</span>
+                        <span class="text-gray-600">SP</span>
+                        <span class="text-gray-600">PO</span>
+                    </div>
+                    <div class="flex justify-around space-x-2">
+                        <span class="text-gray-600 pace">${obj.diving || '00'}</span>
+                        <span class="text-gray-600 shooting">${obj.handling || '00'}</span>
+                        <span class="text-gray-600 passing">${obj.kicking || '00'}</span>
+                        <span class="text-gray-600 dribble">${obj.reflexes || '00'}</span>
+                        <span class="text-gray-600 defense">${obj.speed || '00'}</span>
+                        <span class="text-gray-600 physique">${obj.positioning || '00'}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        } else {
+            newCard = `
+            <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+                <p id="remove" class="text-end text-2xl h-1">&times</p>
+                <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
+                <div class="p-2 space-y-1">
+                    <p class="font-bold text-center name">${obj.name}</p>
+                    <div class="flex justify-evenly">
+                        <span class="text-gray-600 text postion">${obj.position}</span>
+                        <span class="text-gray-600 rating">${obj.rating}</span>
+                        <img src="${obj.flag}" alt="nation" width="20">
+                        <img src="${obj.logo}" alt="club" width="20">
+                    </div>
+                    <div class="flex space-x-1">
+                        <span class="text-gray-600">PC</span>
+                        <span class="text-gray-600">SH</span>
+                        <span class="text-gray-600">PA</span>
+                        <span class="text-gray-600">DR</span>
+                        <span class="text-gray-600">DF</span>
+                        <span class="text-gray-600">PH</span>
+                    </div>
+                    <div class="flex justify-around space-x-2">
+                        <span class="text-gray-600 pace">${obj.pace || '00'}</span>
+                        <span class="text-gray-600 shooting">${obj.shooting || '00'}</span>
+                        <span class="text-gray-600 passing">${obj.passing || '00'}</span>
+                        <span class="text-gray-600 dribble">${obj.dribbling || '00'}</span>
+                        <span class="text-gray-600 defense">${obj.defending || '00'}</span>
+                        <span class="text-gray-600 physique">${obj.physique || '00'}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        }
+
+        function removePlayer(element) {
+            console.log(element);
+        }
+
+        playercontainer.insertAdjacentHTML('afterbegin', newCard);
     }
 
-    function removePlayer(event) {}
-
+    
     function clearInputs(event) {
         console.log('canceled!');
     }
