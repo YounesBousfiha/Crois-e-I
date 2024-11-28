@@ -82,25 +82,25 @@ document.addEventListener('DOMContentLoaded' , function () {
             let formHTML = `
                 <div class="space-y-3 flex flex-col items-center">
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName">
+                        <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="text" placeholder="photoURL">
+                        <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="text" placeholder="photoURL">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality">
+                        <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="flag">
+                        <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="flag">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club">
+                        <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="logoURL">
+                        <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="logoURL">
                     </div>
                     <div>
-                        <input class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="rating">
+                        <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="rating">
                     </div>
                     <div>
                         <select id="playerType" class="py-1 rounded-lg w-96 h-16 text-2xl">
@@ -123,7 +123,10 @@ document.addEventListener('DOMContentLoaded' , function () {
                 </div>`;
             dynamicFields.innerHTML = formHTML;
 
-            document.getElementById('add').addEventListener('click', (event) => operations(event));
+            document.getElementById('add').addEventListener('click', (event) => {
+                event.preventDefault();
+                operations(event);
+            });
             document.getElementById('cancel').addEventListener('click', (event) => operations(event));
 
             let stats = document.getElementById('playerType');
@@ -133,23 +136,33 @@ document.addEventListener('DOMContentLoaded' , function () {
                 if(this.value == '1') {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="passing">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
+                            <div class="col-span-2">
+                                <label><input id="CB" type="radio" name="position" value="CB"> CB</label>
+                                <label><input id="LB" type="radio" name="position" value="LB"> LB</label>
+                                <label><input id="RB" type="radio" name="position" value="RB"> RB</label>
+                                <label><input id="CM" type="radio" name="position" value="CM"> CM</label>
+                                <label><input id="CDM" type="radio" name="position" value="CDM"> CDM</label>
+                                <label><input id="LW" type="radio" name="position" value="LW"> LW</label>
+                                <label><input id="RW" type="radio" name="position" value="RW"> RW</label>
+                                <label><input id="ST" type="radio" name="position" value="ST"> ST</label>
+                            </div>
+                            <input id="pace" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
+                            <input id="shooting" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
+                            <input id="passing" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="passing">
+                            <input id="dribbling" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
+                            <input id="defending" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
+                            <input id="physical" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
                         </div>
                     `
                 } else if (this.value == '2') {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="diving">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="handling">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="kicking">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
-                            <input class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
+                            <input id="diving" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="diving">
+                            <input id="handling" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="handling">
+                            <input id="kicking" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="kicking">
+                            <input id="reflexes" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
+                            <input id="speed" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
+                            <input id="positioning" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
                         </div>
                     `
                 }             
@@ -161,7 +174,6 @@ document.addEventListener('DOMContentLoaded' , function () {
 
     function operations(event) {
         let operation = event.target
-
         if(operation.id == 'add') {
             ajouteNewPlayer(event);
         } else if ( operation.id == 'cancel') {
@@ -170,15 +182,47 @@ document.addEventListener('DOMContentLoaded' , function () {
     }
 
     function ajouteNewPlayer(event) {
-        // open localStorage
-        // take information from the form
-        // groupe the information inside an object
-        // pass the object to createPlayerCard function
-        // stat field take them from the form
-        // save data into localStorage
-        let data = {
+        let formtype = document.getElementById('sourceSelect').value;
+        let storage = JSON.parse(localStorage.getItem('palyers')) || [];
+        let form = event.target.parentElement.parentElement.parentElement;
+        let data = {}
 
+        if (formtype == '1') {
+            let player =  form.querySelector('option:checked');
+            data.name = player.dataset.name;
+            data.photo = player.dataset.photo;
+            data.nationality = player.dataset.nationality;
+            data.club = player.dataset.club;
+            data.logo = player.dataset.logo;
+            data.rating = player.dataset.rating;
+            if (player.dataset.position == 'GK') {
+                data.diving =  player.dataset.diving;
+                data.handling = player.dataset.handling;
+                data.kicking = player.dataset.kicking;
+                data.reflexes = player.dataset.reflexes;
+                data.speed = player.dataset.speed;
+                data.positioning = player.dataset.positioning;
+            } else {
+                data.pace = player.dataset.pace;
+                data.shooting = player.dataset.shooting;
+                data.passing = player.dataset.passing;
+                data.dribbling = player.dataset.dribbling;
+                data.defending = player.dataset.defending;
+                data.physical = player.dataset.physical;
+            }
+            data.position = player.dataset.position;
         }
+
+        if(formtype == '2') {
+            let inputs = form.querySelectorAll('input[type="text"], input[type="number"], input:checked');
+            inputs.forEach((input) => {
+                data[input.id] = input.value;
+            });
+
+            console.log(data);
+        }
+        storage.push(data);
+        localStorage.setItem('palyers', JSON.stringify(storage));
         createPlayerCard(data);
     }
 
@@ -190,7 +234,9 @@ document.addEventListener('DOMContentLoaded' , function () {
 
     function removePlayer(event) {}
 
-    function clearInputs(event) {}
+    function clearInputs(event) {
+        console.log('canceled!');
+    }
 
     /*addBtn.addEventListener('click', () => {
         let playerContainer = document.getElementById('playerContainer');
