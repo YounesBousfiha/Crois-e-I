@@ -160,17 +160,37 @@ document.addEventListener('DOMContentLoaded' , function () {
 
 
     function operations(event) {
-        // function to controle the add & cancel from the modal
-        console.log(event.target);
+        let operation = event.target
+
+        if(operation.id == 'add') {
+            ajouteNewPlayer(event);
+        } else if ( operation.id == 'cancel') {
+            clearInputs(event)
+        }
     }
 
-    function ajouteNewPlayer() {
+    function ajouteNewPlayer(event) {
+        // open localStorage
+        // take information from the form
+        // groupe the information inside an object
+        // pass the object to createPlayerCard function
+        // stat field take them from the form
+        // save data into localStorage
+        let data = {
 
+        }
+        createPlayerCard(data);
     }
 
-    function removePlayer() {
-
+    function createPlayerCard(obj) {
+        // recoit player data
+        // create the common element
+        // fill element based on obj.position
     }
+
+    function removePlayer(event) {}
+
+    function clearInputs(event) {}
 
     /*addBtn.addEventListener('click', () => {
         let playerContainer = document.getElementById('playerContainer');
