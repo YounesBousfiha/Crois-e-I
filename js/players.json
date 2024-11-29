@@ -321,12 +321,13 @@
         "physical": 63
       },
       {
-        "name": "Trent Alexander-Arnold",
+        "name": "Alexander-Arnold",
         "photo": "https://cdn.sofifa.net/players/231/281/25_120.png",
         "position": "RB",
         "nationality": "England",
         "flag": "https://cdn.sofifa.net/flags/gb-eng.png",
         "club": "Liverpool",
+        "logo": "https://cdn.sofifa.net/meta/team/8/120.png",
         "rating": 87,
         "pace": 76,
         "shooting": 66,
@@ -400,7 +401,7 @@
         "physical": 84
       },
       {
-        "name": "Gianluigi Donnarumma",
+        "name": "G. Donnarumma",
         "photo": "https://cdn.sofifa.net/players/230/621/25_120.png",
         "position": "GK",
         "nationality": "Italy",
