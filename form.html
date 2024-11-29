@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="flex justify-center items-center h-screen">
+        <form id="playerForm" class="bg-white flex flex-col items-center justify-center space-y-3 rounded-lg py-3 px-3">
+            <h3 class="text-2xl">Ajoute Un Joueur</h3>
+            <div>
+                <select id="sourceSelect" class="px-5 py-1 rounded-lg w-96 h-16 text-2xl">
+                    <option value="0">Select Votre Source</option>
+                    <option value="1">Public API</option>
+                    <option value="2">Create a New Player</option>
+                </select>
+            </div>
+
+            <div id="dynamicFields">
+        </form>
+    <script src="/js/addtoDB.js"></script>
+</body>
+</html>

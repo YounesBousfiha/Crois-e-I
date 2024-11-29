@@ -1,0 +1,43 @@
+body {
+    background-image: url('../assets/images/background.jpg');
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.remplacement {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#searchBar {
+    background-image: url('../assets/icons/search.png');
+    background-repeat: no-repeat;
+    background-position-x:  95%;
+    background-position-y: 50%;
+    width: 300px;
+    height: 40px;
+}
+
+#terrain {
+    background-image: url('../assets/images/stadium_background.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.player {
+    background-image: url('../assets/images/card.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.display-card {
+    background-image: url('../assets/images/card.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 250px;
+    height: 250px;
+}

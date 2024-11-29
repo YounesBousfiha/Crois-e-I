@@ -5,15 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUT Builder</title>
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="./src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ef048e9f4f.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <div class="container-">
-            hello
+
+        <div id="modal" class="fixed inset-0 flex items-center justify-center bg-opacity-50 hidden z-30">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div id="playersBank" class="flex justify-center">
+
+                </div>
+                <div class="flex justify-center">
+                    <button id="closeModal" class="px-4 py-2 bg-red-500 text-white rounded-lg">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-0 px-4">
+            <nav class="flex justify-between mt-3 px-4 navbar">
+                <div class="w-20 flex items-center">
+                    <img src="./assets/images/Logo.png" alt="Logo">
+                </div>
+
+                <div class="flex items-center max-md:hidden">
+                    <input id="searchBar" class="rounded-lg border-2 px-2" type="text" placeholder="Search...">
+                </div>
+
+                <div class="flex space-x-8 items-center max-md:hidden">
+                    <div class="flex flex-col items-center">
+                        <svg class="w-12 hover:fill-red-700 hover:stroke-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                          </svg>                          
+                          <span class="text-lg text-white"><a href="#" >SquadBuilder</a></span>
+                    </div>
+                    <div>
+                        <div class="flex flex-col items-center">
+                            <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                            </svg>
+                            <!--<span class="">Database</span>-->
+                            <span class="text-lg text-white"><a href="#" >Database</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="burgerMenu" class="text-white focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+
+            <div id="mobileMenu" class="hidden flex flex-col items-center justify-center space-y-8 py-4 bg-white md:hidden">
+                <div class="flex items-center">
+                    <input id="searchBar" class="rounded-lg border-2 px-2" type="text" placeholder="Search...">
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                      <a href="#" class="text-2xl">SquadBuilder</a>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                    </svg>
+                      <a href="#" class="text-2xl">Database</a>
+                </div>
+            </div>
         </div>
     </header>
-    <section></section>
-    <footer></footer>
+
+    <section>
+            <div class="mx-0 px-4 space-y-4">
+
+                <div class="bg-slate-300 px-4 py-3 flex justify-between">
+                    <input class="px-2 py-1 rounded-2xl" type="text" placeholder="Enter le nom de Squad...">
+                    <button class="bg-green-400 text-white text-xl px-6 rounded-lg">
+                        Save
+                    </button>
+                </div>
+
+                <div class="bg-blue-300 px-4 py-3">
+                    <span>Total Chemistry 0 points</span>
+                </div>
+
+                <div id="terrain" class="flex flex-col items-center justify-evenly py-2 px-3">
+                    <!-- Attack -->
+                    <div class="flex max-sm:justify-evenly  max-sm:w-[25rem]">
+                        <!--<div class="player w-44 h-52 max-md:h-28 max-md:w-28 max-sm:h-20 max-sm:w-20"></div>-->
+                        <div class="LW RW ST relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+
+                        <div class="LW RW ST relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+
+                    </div>
+                    <!-- END -->
+
+                    <!-- Middle-->
+                    <div class="flex max-sm:justify-evenly  max-sm:w-[25rem]">
+                        <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Defense-->
+                    <div class="flex max-sm:justify-evenly  max-sm:w-[25rem]">
+                        <div class="LB relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="CB relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="CB relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="RB relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                            <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                            <span class="absolute inset-0 flex justify-center items-center">
+                                <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                    <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                    <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+                    <!-- GoalKeeper-->
+                    <div class="GK relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                        <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                        <span class="absolute inset-0 flex justify-center items-center">
+                            <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                                <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                                <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <!-- END -->
+                </div>
+            </div>
+    </section>
+
+    
+    <section>
+        <br>
+        <br>
+        <h2 class="text-center text-2xl">Les Remplacant</h2>
+        <div id="remplace" class="mt-5 grid grid-cols-5 place-items-center remplacement max-md:grid-cols-3 max-sm:grid-cols-3">
+            <div class="GK relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="GK relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="CB relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="LW RW ST relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="CM CDM relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+
+            <div class="LW RW ST relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20 hover:scale-110 hover:duration-500">
+                <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <br>
+    <footer class="flex justify-center navbar text-white">
+       CopyRight@2024 YouCode-CodeshoGun
+    </footer>
     <script src="/js/main.js"></script>
+    <script src="/js/terrain.js"></script>
 </body>
 </html>

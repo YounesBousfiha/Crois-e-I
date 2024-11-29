@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./js/*.js"],
+  content: ["./*.html", "./pages/*.html" ,"./js/*.js"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Space Grotesk', 'sans-serif']
+      }
+    },
+    backgroundPosition: {
+      'center-right': 'right top 3px',
+    }
   },
   plugins: [],
 }
