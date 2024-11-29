@@ -5,7 +5,7 @@ document.getElementById('burgerMenu').addEventListener('click', function() {
 
 
 
-/*let openModalButton = document.getElementById('terrain');
+let openModalButton = document.getElementById('terrain');
 let playerPlaceholders = document.querySelectorAll('.player-placeholder');
 let closeModalButton = document.getElementById('closeModal');
 let modal = document.getElementById('modal');
@@ -18,4 +18,4 @@ playerPlaceholders.forEach(placeholder => {
 
 closeModalButton.addEventListener('click', () => {
     modal.classList.add('hidden');
-});*/
+});

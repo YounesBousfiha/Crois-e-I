@@ -6,6 +6,10 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.remplacement {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 #searchBar {
     background-image: url('../assets/icons/search.png');
     background-repeat: no-repeat;

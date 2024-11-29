@@ -318,7 +318,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         let tmp = []
         let item = event.target.parentElement;
         let itemName = item.querySelector('.name').textContent;
-        console.log(itemName);
 
         storage.forEach((element) => {
             if(element.name != itemName) {
@@ -337,6 +336,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         localStorage.setItem('playerDB', JSON.stringify(storage));
     }
 
+    // Write a Function that Clear Inputs
     function clearInputs(event) {
         console.log('canceled!');
     }
