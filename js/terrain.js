@@ -51,6 +51,9 @@ function PlayerModal(obj, playerContainer) {
                         <span class="text-gray-600 physique">${obj.positioning || '00'}</span>
                     </div>
                 </div>
+                <div class="bg-green-500 px-3 py-1"">
+                    <button>Select</button>
+                </div>
             </div>`;
     } else {
         playerFromStorage = `
@@ -80,6 +83,9 @@ function PlayerModal(obj, playerContainer) {
                         <span class="text-gray-600 defense">${obj.defending || '00'}</span>
                         <span class="text-gray-600 physique">${obj.physique || '00'}</span>
                     </div>
+                </div>
+                <div class="bg-green-500  px-3 py-1"">
+                    <button>Select</button>
                 </div>
             </div>`;
     }
