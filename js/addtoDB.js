@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         if(formtype == '2') {
             let inputs = form.querySelectorAll('input[type="text"], input[type="number"], input:checked');
             inputs.forEach((input) => {
+                // BUG (Undefined whi user add player Manually)
                 data[input.id] = input.value;
             });
         }
