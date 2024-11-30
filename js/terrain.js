@@ -10,7 +10,7 @@
 // Every Player inside the terrain should be in LocalStorage "inGame"
 // Every Player in changeDeck should be in LocalStorage "inChange"
 
-//Remain
+//BUG: le joueur  doit etre ajouter seulment Une Fois
 
 function addToTerrain(event) {
     let modal = document.getElementById('modal');
@@ -95,8 +95,8 @@ function PlayerModal(obj, playerContainer, firstEvent) {
                         <span class="text-gray-600 physique">${obj.physique || '00'}</span>
                     </div>
                 </div>
-                <div id="select" class="bg-green-500 px-2 text-center text-white">
-                    <button>Select</button>
+                <div class="bg-green-500 px-2 text-center text-white">
+                    <button id="select" class="w-full">Select</button>
                 </div>
             </div>`;
     }
@@ -108,7 +108,7 @@ function PlayerModal(obj, playerContainer, firstEvent) {
 
 function addToPlay(event, originalEvent) {
     let placeHolder = originalEvent.target.parentElement;
-    let card = event.target.parentElement;
+    let card = event.target.parentElement.parentElement;
     let spans = placeHolder.querySelector("span");
 
     if (placeHolder.querySelector('[data-name]')) {
@@ -217,14 +217,17 @@ function removeFromTerrain(event, placeHolder) {
 
 
 function changePlayers(event, placeHolder) {
+    document.getElementById('playerModal').remove();
     // Load Other Modal Point to Replacement LocalStorage
+    // new modal should display contain players from localStorage(remplacant);
+    // select a player
+    // swap the new Player & the old Player data
+    // update the localStorage
     console.log(placeHolder);
 }
 
 // function that track players in Remplacant
 // function that track players in terrain
-
-function removeFromFormation() {}
 
 function saveFormation() {}
 
