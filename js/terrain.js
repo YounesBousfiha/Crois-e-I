@@ -1,7 +1,16 @@
-// BUG: chaque joueur doit etre en terrain ou en remplassant ou on database ( Separation des BaseDonner)
 // Refactoring : reDesign Expand player Card
-// FEAT: Add modifie BTN & Remove BTN ( remove from Formation ou From Remplassant);
+
 // FEAT: add REGEX Validation
+
+
+// FEAT: Add modifie BTN & Remove BTN ( remove from Formation ou From Remplassant);
+
+// BUG: chaque joueur doit etre en terrain ou en remplassant ou on database ( Separation des BaseDonner)
+// Plan D'action
+// Every Player inside the terrain should be in LocalStorage "inGame"
+// Every Player in changeDeck should be in LocalStorage "inChange"
+
+//Remain
 
 function addToTerrain(event) {
     let modal = document.getElementById('modal');
@@ -98,14 +107,13 @@ function PlayerModal(obj, playerContainer, firstEvent) {
 }
 
 function addToPlay(event, originalEvent) {
-    console.log()
     let placeHolder = originalEvent.target.parentElement;
     let card = event.target.parentElement;
     let spans = placeHolder.querySelector("span");
 
     if (placeHolder.querySelector('[data-name]')) {
         return;
-    }
+    } 
 
     spans.remove();
     let newElement = `
@@ -123,53 +131,114 @@ function addToPlay(event, originalEvent) {
             </div>
             <span class="font-semibold max-md:text-sm max-sm:text-[6px]">${card.dataset.name}</span>
         </div>`;
-        console.log("fill card :", placeHolder);
+
         placeHolder.innerHTML += newElement;
 
         document.getElementById('player').addEventListener('click', (event) => expandPlayer(event));
 }
 
 function expandPlayer(element) {
-    document.getElementById('terrain').removeEventListener('click', addToTerrain);
 
+    //document.getElementById('terrain').removeEventListener('click', addToTerrain);
     let playerDetails = `
     <div id="playerModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div class="bg-white p-4 rounded-lg">
-            <h2 class="text-xl font-bold">${element.dataset.name}</h2>
+        <div class="bg-white p-4 rounded-lg max-w-md w-full mx-4">
+            <div class="flex justify-end">
+                <span id="closeDetails" class="mt-1 px-4 py-1 bg-black text-white rounded">&times</span>
+            </div>
+            <h2 class="text-xl font-bold text-center">${element.dataset.name}</h2>
             <img src="${element.dataset.photo}" alt="Player Image" class="w-32 h-32 object-cover rounded-full mx-auto">
-            <p>Rating: ${element.dataset.rating}</p>
-            <p>Position: ${element.dataset.position}</p>
-            <p>Nationality: <img src="${element.dataset.flag}" alt="nation" width="20"></p>
-            <p>Club: <img src="${element.dataset.logo}" alt="club" width="20"></p>
-            <button id="closeDetails" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+            <p class="text-center">Rating: ${element.dataset.rating}</p>
+            <p class="text-center">Position: ${element.dataset.position}</p>
+            <div class="flex justify-center gap-2">
+                <p class="text-center">Nationality:</p>
+                <img src="${element.dataset.flag}" alt="nation" width="20">
+            </div>
+            <div class="flex justify-center gap-2">
+                <p class="text-center">Club: </p>
+                <img src="${element.dataset.logo}" alt="club" width="20">
+            </div>
+            <div class="grid grid-cols-2 mt-4">
+                <div class="text-center">
+                    <span class="font-bold">Stat 1: </span>
+                    <span>${element.dataset.stat1 || '00'}</span>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">Stat 2: </span>
+                    <span>${element.dataset.stat2 || '00'}</span>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">Stat 3: </span>
+                    <span>${element.dataset.stat3 || '00'}</span>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">Stat 4: </span>
+                    <span>${element.dataset.stat4 || '00'}</span>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">Stat 5: </span>
+                    <span>${element.dataset.stat5 || '00'}</span>
+                </div>
+                <div class="text-center">
+                    <span class="font-bold">Stat 6: </span>
+                    <span>${element.dataset.stat6 || '00'}</span>
+                </div>
+            </div>
+            <div class="flex justify-around mt-4">
+                <button id="ChangePlayer" class="px-4 py-2 bg-yellow-500 text-white rounded">Change</button>
+                <button id="RemovePlayer" class="px-4 py-2 bg-red-500 text-white rounded">Remove</button>
+            </div>
         </div>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', playerDetails);
     
+    let placeholder = event.target.parentElement;
+    document.getElementById('ChangePlayer').addEventListener('click',  (event) => changePlayers(event, placeholder));
+    document.getElementById('RemovePlayer').addEventListener('click', (event) => removeFromTerrain(event, placeholder));
+
     document.getElementById('closeDetails').addEventListener('click', () => {
         document.getElementById('playerModal').remove();
     });
 }
 
+
+function removeFromTerrain(event, placeHolder) {
+    let cible = placeHolder.querySelector('[data-name]');
+    cible.remove();
+    placeHolder.innerHTML += `
+                <span class="absolute inset-0 flex justify-center items-center">
+                    <svg class="w-16 max-md:w-12 max-sm:w-8" viewBox="0 0 36 42" fill="none">
+                        <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
+                        <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>`;
+}
+
+
+
+function changePlayers(event, placeHolder) {
+    // Load Other Modal Point to Replacement LocalStorage
+    console.log(placeHolder);
+}
+
+// function that track players in Remplacant
+// function that track players in terrain
+
 function removeFromFormation() {}
-function removeFromTerrain() {}
-
-function changePlayers() {}
-
-
 
 function saveFormation() {}
 
 
 document.getElementById('terrain').addEventListener('click', (event) => {
-    let placeHolder = event.target.parentElement.parentElement;
+    let placeHolder = event.target.parentElement;
     if (!placeHolder.querySelector('[data-name]')) {
         addToTerrain(event);
     }
 });
 
 document.getElementById('remplace').addEventListener('click', (event) => {
-    let placeHolder = event.target.parentElement.parentElement;
+    let placeHolder = event.target.parentElement;
+    console.log(placeHolder);
     if (!placeHolder.querySelector('[data-name]')) {
         addToTerrain(event);
     }

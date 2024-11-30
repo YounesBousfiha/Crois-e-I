@@ -22,7 +22,7 @@
         </span>
     </div>-->
 
-    <div class="relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20">
+    <!--<div class="relative w-44 h-52 max-md:h-40 max-md:w-36 max-sm:h-24 max-sm:w-20">
         <img src="./assets/images/card.png" alt="card" class="w-full h-full object-cover rounded-lg">
         <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4 ">
             <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
@@ -37,6 +37,22 @@
                 <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="player" class="w-28 -mt-5 max-sm:w-16 max-sm:h-12 object-contain">
             </div>
             <span class="font-semibold max-md:text-sm max-sm:text-[8px]">Lionel Messi</span>
+        </div>
+    </div>-->
+
+    <div id="playerModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-4 rounded-lg">
+        <div class="flex justify-end">
+            <span id="closeDetails" class=" mt-1 px-4 py-1 bg-black text-white rounded">&times</span>
+        </div>
+            <h2 class="text-xl font-bold">Younes Bousfiha</h2>
+            <img src="https://cdn.sofifa.net/players/020/801/25_120.png" alt="Player Image" class="w-32 h-32 object-cover rounded-full mx-auto">
+            <p>Rating: 90</p>
+            <p>Position: ST</p>
+            <p>Nationality: <img src="https://cdn.sofifa.net/flags/ar.png" alt="nation" width="20"></p>
+            <p>Club: <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="club" width="20"></p>
+            <button id="ChangePlayer" class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded">Change</button>
+            <button id="RemovePlayer" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Remove</button>
         </div>
     </div>
 </body>
