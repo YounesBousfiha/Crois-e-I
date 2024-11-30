@@ -1,3 +1,8 @@
+// BUG: chaque joueur doit etre en terrain ou en remplassant ou on database ( Separation des BaseDonner)
+// Refactoring : reDesign Expand player Card
+// FEAT: Add modifie BTN & Remove BTN ( remove from Formation ou From Remplassant);
+// FEAT: add REGEX Validation
+
 function addToTerrain(event) {
     let modal = document.getElementById('modal');
     modal.classList.remove('hidden');
@@ -156,8 +161,6 @@ function changePlayers() {}
 function saveFormation() {}
 
 
-
-
 document.getElementById('terrain').addEventListener('click', (event) => {
     let placeHolder = event.target.parentElement.parentElement;
     if (!placeHolder.querySelector('[data-name]')) {
@@ -166,5 +169,8 @@ document.getElementById('terrain').addEventListener('click', (event) => {
 });
 
 document.getElementById('remplace').addEventListener('click', (event) => {
-    addToTerrain(event);
+    let placeHolder = event.target.parentElement.parentElement;
+    if (!placeHolder.querySelector('[data-name]')) {
+        addToTerrain(event);
+    }
 });
