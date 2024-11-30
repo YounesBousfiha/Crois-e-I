@@ -93,6 +93,7 @@ function PlayerModal(obj, playerContainer, firstEvent) {
 }
 
 function addToPlay(event, originalEvent) {
+    console.log()
     let placeHolder = originalEvent.target.parentElement;
     let card = event.target.parentElement;
     let spans = placeHolder.querySelector("span");
@@ -103,7 +104,7 @@ function addToPlay(event, originalEvent) {
 
     spans.remove();
     let newElement = `
-    <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}" data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}">
+    <div data-name="${card.dataset.name}" data-position="${card.dataset.position}" data-rating="${card.dataset.rating}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-photo="${card.dataset.photo}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}" data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}">
             <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
                 <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
                     <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">${card.dataset.rating}</span>
@@ -125,23 +126,23 @@ function addToPlay(event, originalEvent) {
 
 function expandPlayer(element) {
     document.getElementById('terrain').removeEventListener('click', addToTerrain);
+
     let playerDetails = `
     <div id="playerModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
         <div class="bg-white p-4 rounded-lg">
-            <h2 class="text-xl font-bold">${element.getAttribute('data-name')}</h2>
-            <img src="${element.getAttribute('data-photo')}" alt="Player Image" class="w-32 h-32 object-cover rounded-full mx-auto">
-            <p>Rating: ${element.getAttribute('data-rating')}</p>
-            <p>Position: ${element.getAttribute('data-position')}</p>
-            <p>Nationality: <img src="${element.getAttribute('data-flag')}" alt="nation" width="20"></p>
-            <p>Club: <img src="${element.getAttribute('data-logo')}" alt="club" width="20"></p>
-            <button id="closeModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+            <h2 class="text-xl font-bold">${element.dataset.name}</h2>
+            <img src="${element.dataset.photo}" alt="Player Image" class="w-32 h-32 object-cover rounded-full mx-auto">
+            <p>Rating: ${element.dataset.rating}</p>
+            <p>Position: ${element.dataset.position}</p>
+            <p>Nationality: <img src="${element.dataset.flag}" alt="nation" width="20"></p>
+            <p>Club: <img src="${element.dataset.logo}" alt="club" width="20"></p>
+            <button id="closeDetails" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
         </div>
     </div>`;
     document.body.insertAdjacentHTML('beforeend', playerDetails);
-
-    document.getElementById('closeModal').addEventListener('click', () => {
+    
+    document.getElementById('closeDetails').addEventListener('click', () => {
         document.getElementById('playerModal').remove();
-        document.getElementById('terrain').addEventListener('click', addToTerrain);
     });
 }
 
@@ -154,8 +155,14 @@ function changePlayers() {}
 
 function saveFormation() {}
 
+
+
+
 document.getElementById('terrain').addEventListener('click', (event) => {
-    addToTerrain(event);
+    let placeHolder = event.target.parentElement.parentElement;
+    if (!placeHolder.querySelector('[data-name]')) {
+        addToTerrain(event);
+    }
 });
 
 document.getElementById('remplace').addEventListener('click', (event) => {
