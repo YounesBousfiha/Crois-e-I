@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded' , function () {
-    let addBtn = document.getElementById('addNewPlayer');
 
     LoadFromLocalStorage();
 
@@ -205,8 +204,13 @@ document.addEventListener('DOMContentLoaded' , function () {
         let formtype = document.getElementById('sourceSelect').value;
         let storage = JSON.parse(localStorage.getItem('playerDB')) || [];
         let form = event.target.parentElement.parentElement.parentElement;
-        let data = {}
+        let data = {};
 
+        let ExistsPlayer = [];
+
+        storage.forEach((player) => {
+            ExistsPlayer.push(player.name);
+        })
         if (formtype == '1') {
             let player =  form.querySelector('option:checked');
             data.name = player.dataset.name;
@@ -239,10 +243,13 @@ document.addEventListener('DOMContentLoaded' , function () {
                 data[input.id] = input.value;
             });
         }
-        // Perform a Vadication before push into Local Sotrage 
-        storage.push(data);
-        localStorage.setItem('playerDB', JSON.stringify(storage));
-        createPlayerCard(data);
+        
+        if(!ExistsPlayer.includes(data.name)) {
+            storage.push(data);
+            localStorage.setItem('playerDB', JSON.stringify(storage));
+            createPlayerCard(data);
+        }
+        document.getElementById('modal').classList.add('hidden');
     }
 
     function createPlayerCard(obj) {
@@ -313,7 +320,7 @@ document.addEventListener('DOMContentLoaded' , function () {
             </div>
         `;
         }
-
+        console.log("Here");
         playercontainer.insertAdjacentHTML('afterbegin', newCard);
     }
 
