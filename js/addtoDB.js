@@ -147,14 +147,14 @@ document.addEventListener('DOMContentLoaded' , function () {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
                             <div class="col-span-2">
-                                <label><input id="CB" type="radio" name="position" value="CB"> CB</label>
-                                <label><input id="LB" type="radio" name="position" value="LB"> LB</label>
-                                <label><input id="RB" type="radio" name="position" value="RB"> RB</label>
-                                <label><input id="CM" type="radio" name="position" value="CM"> CM</label>
-                                <label><input id="CDM" type="radio" name="position" value="CDM"> CDM</label>
-                                <label><input id="LW" type="radio" name="position" value="LW"> LW</label>
-                                <label><input id="RW" type="radio" name="position" value="RW"> RW</label>
-                                <label><input id="ST" type="radio" name="position" value="ST"> ST</label>
+                                <label><input id="position" type="radio" name="position" value="CB"> CB</label>
+                                <label><input id="position" type="radio" name="position" value="LB"> LB</label>
+                                <label><input id="position" type="radio" name="position" value="RB"> RB</label>
+                                <label><input id="position" type="radio" name="position" value="CM"> CM</label>
+                                <label><input id="position" type="radio" name="position" value="CDM"> CDM</label>
+                                <label><input id="position" type="radio" name="position" value="LW"> LW</label>
+                                <label><input id="position" type="radio" name="position" value="RW"> RW</label>
+                                <label><input id="position" type="radio" name="position" value="ST"> ST</label>
                             </div>
                             <input id="pace" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
                             <input id="shooting" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
@@ -226,7 +226,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         if(formtype == '2') {
             let inputs = form.querySelectorAll('input[type="text"], input[type="number"], input:checked');
             inputs.forEach((input) => {
-                // BUG (Undefined whi user add player Manually)
                 data[input.id] = input.value;
             });
         }
@@ -337,7 +336,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         localStorage.setItem('playerDB', JSON.stringify(storage));
     }
 
-    // Write a Function that Clear Inputs
     function clearInputs() {
         let selectChoices = modal.querySelector('#sourceSelect');
         selectChoices.selectedIndex = 0;
