@@ -1,5 +1,5 @@
 function addToTerrain(event) {
-    // BUG: Ajoute Multiple on remplacant
+
     let modal = document.getElementById('modal');
     modal.classList.remove('hidden');
     let selectedPlace = event.target.parentElement;
@@ -68,7 +68,7 @@ function PlayerModal(obj, playerContainer, firstEvent) {
                     </div>
                 </div>
                 <div id="select" class="bg-green-500 px-2 text-center text-white">
-                    <button>Select</button>
+                    <button class="w-full">Select</button>
                 </div>
             </div>`;
     } else {
@@ -107,7 +107,7 @@ function PlayerModal(obj, playerContainer, firstEvent) {
     }
 
     playerContainer.insertAdjacentHTML('afterbegin' ,playerFromStorage);
-
+    
     document.getElementById('select').addEventListener('click', (event) => addToPlay(event, firstEvent));
 }
 
@@ -156,6 +156,8 @@ function addToPlay(event, originalEvent) {
         localStorage.setItem('remplacant', JSON.stringify(ChangeStorage));
     }
 
+    document.getElementById('modal').classList.add('hidden');
+
     if (placeHolder.querySelector('[data-name]')) {
         return;
     } 
@@ -165,7 +167,7 @@ function addToPlay(event, originalEvent) {
     let newElement;
     if(card.dataset.position == 'GK') {
         newElement = `
-        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-diving="${card.dataset.diving}" data-handling="${card.dataset.handling}" data-kicking="${card.dataset.kicking}" data-reflexes="${card.dataset.reflexes}" data-speed="${card.dataset.speed}" data-positioning="${card.dataset.positioning}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
+        <div id="player" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-diving="${card.dataset.diving}" data-handling="${card.dataset.handling}" data-kicking="${card.dataset.kicking}" data-reflexes="${card.dataset.reflexes}" data-speed="${card.dataset.speed}" data-positioning="${card.dataset.positioning}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
                 <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
                     <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
                         <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">${card.dataset.rating}</span>
@@ -181,7 +183,7 @@ function addToPlay(event, originalEvent) {
             </div>`;   
     } else {
         newElement = `
-        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-pace="${card.dataset.pace}" data-shooting="${card.dataset.shooting}" data-passing="${card.dataset.passing}" data-dribbling="${card.dataset.dribble}" data-defending="${card.dataset.defense}" data-physical="${card.dataset.physique}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
+        <div id="player" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-pace="${card.dataset.pace}" data-shooting="${card.dataset.shooting}" data-passing="${card.dataset.passing}" data-dribbling="${card.dataset.dribble}" data-defending="${card.dataset.defense}" data-physical="${card.dataset.physique}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
                 <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
                     <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
                         <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">${card.dataset.rating}</span>
@@ -201,7 +203,6 @@ function addToPlay(event, originalEvent) {
         placeHolder.innerHTML += newElement;
 
         document.getElementById('player').addEventListener('click', (event) => expandPlayer(event));
-        document.getElementById('modal').classList.add('hidden');
 }
 
 function expandPlayer(element) {
@@ -480,7 +481,6 @@ function changePlayers(event, placeHolder) {
 }
 
 function swapPlayer(event, placeHolder) {
-    console.log("Hello")
     let remplacantStorage = JSON.parse(localStorage.getItem('remplacant')) || [];
     let temp = [];
     let newPlayer = event.target.parentElement.parentElement;
@@ -533,6 +533,7 @@ function swapPlayer(event, placeHolder) {
 
     parentOfOldPlayer.replaceChild(cloneTarget, OldPlayer);
     parentOfTargetPlayer.replaceChild(cloneOld, playerTarget);
+    document.getElementById('ChangeModal').classList.add('hidden');
 }
 
 

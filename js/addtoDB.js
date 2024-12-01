@@ -262,6 +262,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                 localStorage.setItem('playerDB', JSON.stringify(storage));
                 createPlayerCard(data);
                 document.getElementById('modal').classList.add('hidden');
+                clearInputs(event);
             }
         }
     }
