@@ -1,4 +1,5 @@
 function addToTerrain(event) {
+    // BUG: Ajoute Multiple on remplacant
     let modal = document.getElementById('modal');
     modal.classList.remove('hidden');
     let selectedPlace = event.target.parentElement;
@@ -28,7 +29,7 @@ function addToTerrain(event) {
     playerContainer.innerHTML = ``;
     storage.forEach(player => {
         if(availablePosition.includes(player.position)) {
-            if(!playerinTerrain.includes(player.name) || playerRemplacant.includes(player.name)) {
+            if(!playerinTerrain.includes(player.name) && !playerRemplacant.includes(player.name)) {
                 PlayerModal(player, playerContainer, event);
             }
         }
@@ -72,7 +73,7 @@ function PlayerModal(obj, playerContainer, firstEvent) {
             </div>`;
     } else {
         playerFromStorage = `
-        <div id="player" data-name="${obj.name}" data-rating="${obj.rating}" data-photo="${obj.photo}"  data-position="${obj.position}" data-flag="${obj.flag}" data-logo="${obj.logo}" data-pace="${obj.pace}" data-shooting="${obj.shooting}" data-passing="${obj.passing}" data-dribble="${obj.dribbling}" data-defense="${obj.defending}" data-physique="${obj.physical}" class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+        <div data-name="${obj.name}" data-rating="${obj.rating}" data-photo="${obj.photo}"  data-position="${obj.position}" data-flag="${obj.flag}" data-logo="${obj.logo}" data-pace="${obj.pace}" data-shooting="${obj.shooting}" data-passing="${obj.passing}" data-dribble="${obj.dribbling}" data-defense="${obj.defending}" data-physique="${obj.physical}" class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
                 <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                 <div class="p-2 space-y-1">
                     <p class="font-bold text-center name">${obj.name}</p>
@@ -164,7 +165,7 @@ function addToPlay(event, originalEvent) {
     let newElement;
     if(card.dataset.position == 'GK') {
         newElement = `
-        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-diving="${card.dataset.diving}" data-handling="${card.dataset.handling}" data-kicking="${card.dataset.kicking}" data-reflexes="${card.dataset.reflexes}" data-speed="${card.dataset.speed}" data-positioning="${card.dataset.positioning}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}" data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}">
+        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-diving="${card.dataset.diving}" data-handling="${card.dataset.handling}" data-kicking="${card.dataset.kicking}" data-reflexes="${card.dataset.reflexes}" data-speed="${card.dataset.speed}" data-positioning="${card.dataset.positioning}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
                 <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
                     <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
                         <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">${card.dataset.rating}</span>
@@ -180,7 +181,7 @@ function addToPlay(event, originalEvent) {
             </div>`;   
     } else {
         newElement = `
-        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-pace="${card.dataset.pace}" data-shooting="${card.dataset.shooting}" data-passing="${card.dataset.passing}" data-dribbling="${card.dataset.dribble}" data-defending="${card.dataset.defense}" data-physical="${card.dataset.physique}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}" data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}">
+        <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-pace="${card.dataset.pace}" data-shooting="${card.dataset.shooting}" data-passing="${card.dataset.passing}" data-dribbling="${card.dataset.dribble}" data-defending="${card.dataset.defense}" data-physical="${card.dataset.physique}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)">
                 <div class="flex items-center justify-between w-28 max-md:w-24 max-sm:w-12 mt-5">
                     <div class="flex flex-col max-sm:-mt-6 max-sm:leading-[0px]">
                         <span class="text-lg font-bold max-md:text-sm max-sm:text-[8px] max-ms:mt-2 max-sm:h-3">${card.dataset.rating}</span>
@@ -325,8 +326,6 @@ function expandPlayer(element) {
 
 
 function removeFromTerrain(event, placeHolder) {
-    console.log(event.target);
-    console.log(placeHolder.parentElement.id);
     document.getElementById('playerModal').remove();
     let cible = placeHolder.querySelector('[data-name]');
 
@@ -372,7 +371,7 @@ function changePlayers(event, placeHolder) {
         if(availablePosition.includes(player.position)) {
             if(player.position == 'GK') {
                 playerChange  = `
-                <div data-name="${player.name}"
+                <div id="player" data-name="${player.name}"
                     data-rating="${player.rating}"
                     data-photo="${player.photo}"
                     data-position="${player.position}"
@@ -411,8 +410,8 @@ function changePlayers(event, placeHolder) {
                                 <span class="text-gray-600 physique">${player.positioning || '00'}</span>
                             </div>
                         </div>
-                        <div id="selectToChange" class="bg-green-500 px-2 text-center text-white">
-                            <button>Change</button>
+                        <div class="bg-green-500 px-2 text-center text-white">
+                            <button class="w-full selectToChange">Change</button>
                         </div>
                     </div>`;
             } else {
@@ -458,13 +457,18 @@ function changePlayers(event, placeHolder) {
                             </div>
                         </div>
                         <div class="bg-green-500 px-2 text-center text-white">
-                            <button id="selectToChange" class="w-full">Change</button>
+                            <button class="w-full selectToChange">Change</button>
                         </div>
                     </div>`;
             }
 
             changeBank.innerHTML += playerChange;
-            document.getElementById('selectToChange').addEventListener('click', (event) =>  swapPlayer(event, placeHolder));
+        }
+    });
+
+    changeBank.addEventListener('click', (event) => {
+        if (event.target.classList.contains('selectToChange')) {
+            swapPlayer(event, placeHolder);
         }
     });
 
@@ -476,6 +480,7 @@ function changePlayers(event, placeHolder) {
 }
 
 function swapPlayer(event, placeHolder) {
+    console.log("Hello")
     let remplacantStorage = JSON.parse(localStorage.getItem('remplacant')) || [];
     let temp = [];
     let newPlayer = event.target.parentElement.parentElement;
@@ -492,36 +497,35 @@ function swapPlayer(event, placeHolder) {
 
     remplacantStorage.forEach((player) => {
         if(player.name == OldPlayer.dataset.name) {
-            player.name = OldPlayer.dataset.name,
-            player.position = OldPlayer.dataset.position,
-            player.rating = OldPlayer.dataset.rating,
-            player.flag = OldPlayer.dataset.flag,
-            player.logo = OldPlayer.dataset.logo,
-            player.photo = OldPlayer.dataset.photo,
-            player.diving = OldPlayer.dataset.diving,
-            player.handling = OldPlayer.dataset.handling,
-            player.kicking = OldPlayer.dataset.kicking,
-            player.reflexes = OldPlayer.dataset.reflexes,
-            player.speed = OldPlayer.dataset.speed,
-            player.positioning = OldPlayer.dataset.positioning
-        } else {
-            player.name = OldPlayer.dataset.name,
-            player.position = OldPlayer.dataset.position,
-            player.rating = OldPlayer.dataset.rating,
-            player.flag = OldPlayer.dataset.flag,
-            player.logo = OldPlayer.dataset.logo,
-            player.photo = OldPlayer.dataset.photo,
-            player.pace = OldPlayer.dataset.pace,
-            player.shooting = OldPlayer.dataset.shooting,
-            player.passing = OldPlayer.dataset.passing,
-            player.dribbling = OldPlayer.dataset.dribbling,
-            player.defending = OldPlayer.dataset.defending,
-            player.physical = OldPlayer.dataset.physical
+            player.name = newPlayer.dataset.name;
+            player.position = newPlayer.dataset.position;
+            player.rating = newPlayer.dataset.rating;
+            player.flag = newPlayer.dataset.flag;
+            player.logo = newPlayer.dataset.logo;
+            player.photo = newPlayer.dataset.photo;
+            player.diving = newPlayer.dataset.diving;
+            player.handling = newPlayer.dataset.handling;
+            player.kicking = newPlayer.dataset.kicking;
+            player.reflexes = newPlayer.dataset.reflexes;
+            player.speed = newPlayer.dataset.speed;
+            player.positioning = newPlayer.dataset.positioning;
+        } else if (player.name == newPlayer.dataset.name) {
+            player.name = OldPlayer.dataset.name;
+            player.position = OldPlayer.dataset.position;
+            player.rating = OldPlayer.dataset.rating;
+            player.flag = OldPlayer.dataset.flag;
+            player.logo = OldPlayer.dataset.logo;
+            player.photo = OldPlayer.dataset.photo;
+            player.pace = OldPlayer.dataset.pace;
+            player.shooting = OldPlayer.dataset.shooting;
+            player.passing = OldPlayer.dataset.passing;
+            player.dribbling = OldPlayer.dataset.dribbling;
+            player.defending = OldPlayer.dataset.defending;
+            player.physical = OldPlayer.dataset.physical;
         }
 
         temp.push(player);
-
-        });
+    });
 
     remplacantStorage = temp;
 

@@ -872,6 +872,10 @@ video {
   cursor: pointer;
 }
 
+.auto-cols-min {
+  grid-auto-columns: min-content;
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1337,6 +1341,10 @@ video {
     display: flex;
   }
 
+  .max-md\:grid {
+    display: grid;
+  }
+
   .max-md\:hidden {
     display: none;
   }
@@ -1367,6 +1375,10 @@ video {
 
   .max-md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .max-md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .max-md\:flex-col {
@@ -1403,6 +1415,10 @@ video {
 
   .max-sm\:flex {
     display: flex;
+  }
+
+  .max-sm\:grid {
+    display: grid;
   }
 
   .max-sm\:h-12 {
