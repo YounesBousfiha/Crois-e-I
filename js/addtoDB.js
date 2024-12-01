@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                         <span class="text-gray-600 passing">${obj.passing || '00'}</span>
                         <span class="text-gray-600 dribble">${obj.dribbling || '00'}</span>
                         <span class="text-gray-600 defense">${obj.defending || '00'}</span>
-                        <span class="text-gray-600 physique">${obj.physique || '00'}</span>
+                        <span class="text-gray-600 physique">${obj.physical || '00'}</span>
                     </div>
                 </div>
             </div>
