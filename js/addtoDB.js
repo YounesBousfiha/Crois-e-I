@@ -90,47 +90,55 @@ document.addEventListener('DOMContentLoaded' , function () {
 
         function fillViaFrom() {
             let formHTML = `
-                <div class="space-y-3 flex flex-col items-center">
-                    <div>
-                        <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName">
+                <div class="grid grid-cols-2 overflow-auto h-96 max-md:flex max-md:flex-col max-sm:flex max-sm:flex-col">
+                    <div class="flex flex-col">
+                        <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName" required>
+                        <span id="ErrorName">Error name</span>
                     </div>
-                    <div>
-                        <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="text" placeholder="photoURL">
+                    <div class="flex flex-col">
+                        <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="text" placeholder="photoURL" required>
+                        <span id="ErrorPhoto">Error photo</span>
                     </div>
-                    <div>
-                        <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality">
+                    <div class="flex flex-col">
+                        <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality" required>
+                        <span id="ErrorNational">Error Nationality</span>
                     </div>
-                    <div>
-                        <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="flag">
+                    <div class="flex flex-col">
+                        <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="flag" required>
+                        <span id="ErrorFlag">Flag Error</span>
                     </div>
-                    <div>
-                        <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club">
+                    <div class="flex flex-col">
+                        <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club" required>
+                        <span id="ErrorClub">Club Error</span>
                     </div>
-                    <div>
-                        <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="logoURL">
+                    <div class="flex flex-col">
+                        <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="logoURL" required>
+                        <span id="ErrorLogo">Logo Error</span>
                     </div>
-                    <div>
-                        <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="rating">
+                    <div class="flex flex-col">
+                        <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="rating" required>
+                        <span id="ErrorRating">Enter a rating</span>
                     </div>
-                    <div>
+                    <div class="flex flex-col">
                         <select id="playerType" class="py-1 rounded-lg w-96 h-16 text-2xl">
                             <option value="0">Select Position</option>
                             <option value="1">Joueur</option>
                             <option value="2">Gardient</option>
                         </select>
+                        <span id="ErrorSelect">Choisir Un type</span>
                     </div>
-                    <div id="stats-form">
+                    <div id="stats-form" class="col-span-2 place-items-center">
                     </div>
+                </div>
 
-                    <div class="flex">
+                <div class="flex justify-center items-center">
                         <div>
                             <button id="add" class="text-4xl border-2 px-2 rounded-lg text-white bg-green-400 hover:bg-green-700 hover:duration-500" type="submit" >Ajouter</button>
                         </div>
                         <div>
                             <button id="cancel" class="text-4xl border-2 px-2 rounded-lg text-white bg-red-400 hover:bg-red-700 hover:duration-500" type="submit" >Cancel</button>
                         </div>
-                    </div>
-                </div>`;
+                    </div>`;
             dynamicFields.innerHTML = formHTML;
 
             document.getElementById('add').addEventListener('click', (event) => {
@@ -162,6 +170,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <input id="dribbling" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
                             <input id="defending" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
                             <input id="physical" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
+                            <span id="stats" class="text-center">remplir les stats</span>
                         </div>
                     `
                 } else if (this.value == '2') {
@@ -173,6 +182,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <input id="reflexes" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
                             <input id="speed" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
                             <input id="positioning" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
+                            <span id="stats">remplir les stats</span>
                         </div>
                     `
                 }             
