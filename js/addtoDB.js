@@ -91,32 +91,32 @@ document.addEventListener('DOMContentLoaded' , function () {
             let formHTML = `
                 <div class="grid grid-cols-2 overflow-auto h-96 max-md:flex max-md:flex-col max-sm:flex max-sm:flex-col">
                     <div class="flex flex-col">
-                        <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName" required>
-                        <span id="ErrorName">Error name</span>
+                        <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName">
+                        <span id="ErrorName" class="hidden">Error name</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="text" placeholder="photoURL" required>
-                        <span id="ErrorPhoto">Error photo</span>
+                        <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="url" placeholder="photoURL">
+                        <span id="ErrorPhoto" class="hidden">Error photo</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality" required>
-                        <span id="ErrorNational">Error Nationality</span>
+                        <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality">
+                        <span id="ErrorNational" class="hidden">Error Nationality</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="flag" required>
-                        <span id="ErrorFlag">Flag Error</span>
+                        <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="url" placeholder="flag" >
+                        <span id="ErrorFlag" class="hidden">Flag Error</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club" required>
-                        <span id="ErrorClub">Club Error</span>
+                        <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club" >
+                        <span id="ErrorClub" class="hidden">Club Error</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="logoURL" required>
-                        <span id="ErrorLogo">Logo Error</span>
+                        <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="url" placeholder="logoURL" >
+                        <span id="ErrorLogo" class="hidden">Logo Error</span>
                     </div>
                     <div class="flex flex-col">
-                        <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="rating" required>
-                        <span id="ErrorRating">Enter a rating</span>
+                        <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="number" placeholder="rating" >
+                        <span id="ErrorRating" class="hidden">Enter a rating</span>
                     </div>
                     <div class="flex flex-col">
                         <select id="playerType" class="py-1 rounded-lg w-96 h-16 text-2xl">
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <option value="1">Joueur</option>
                             <option value="2">Gardient</option>
                         </select>
-                        <span id="ErrorSelect">Choisir Un type</span>
+                        <span id="ErrorSelect" class="hidden">Choisir Un type</span>
                     </div>
                     <div id="stats-form" class="col-span-2 place-items-center">
                     </div>
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
                             <div class="col-span-2">
-                                <label><input id="position" type="radio" name="position" value="CB"> CB</label>
+                                <label><input id="position" type="radio" name="position" value="CB" checked> CB</label>
                                 <label><input id="position" type="radio" name="position" value="LB"> LB</label>
                                 <label><input id="position" type="radio" name="position" value="RB"> RB</label>
                                 <label><input id="position" type="radio" name="position" value="CM"> CM</label>
@@ -163,25 +163,25 @@ document.addEventListener('DOMContentLoaded' , function () {
                                 <label><input id="position" type="radio" name="position" value="RW"> RW</label>
                                 <label><input id="position" type="radio" name="position" value="ST"> ST</label>
                             </div>
-                            <input id="pace" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="pace">
-                            <input id="shooting" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="shooting">
-                            <input id="passing" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="passing">
-                            <input id="dribbling" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="dribbling">
-                            <input id="defending" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="defending">
-                            <input id="physical" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="physical">
-                            <span id="stats" class="text-center">remplir les stats</span>
+                            <input id="pace" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="pace">
+                            <input id="shooting" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="shooting">
+                            <input id="passing" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="passing">
+                            <input id="dribbling" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="dribbling">
+                            <input id="defending" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="defending">
+                            <input id="physical" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="physical">
+                            <span id="stats" class="text-center hidden">remplir les stats</span>
                         </div>
                     `
                 } else if (this.value == '2') {
                     statsInputs.innerHTML += `
                         <div class="grid grid-cols-2 w-96 place-items-center">
-                            <input id="diving" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="diving">
-                            <input id="handling" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="handling">
-                            <input id="kicking" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="kicking">
-                            <input id="reflexes" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="reflexes">
-                            <input id="speed" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="speed">
-                            <input id="positioning" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="100" step="1" placeholder="positioning">
-                            <span id="stats">remplir les stats</span>
+                            <input id="diving" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="diving">
+                            <input id="handling" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="handling">
+                            <input id="kicking" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="kicking">
+                            <input id="reflexes" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="reflexes">
+                            <input id="speed" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="speed">
+                            <input id="positioning" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="positioning">
+                            <span id="stats" class="hidden">remplir les stats</span>
                         </div>
                     `
                 }             
@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         let storage = JSON.parse(localStorage.getItem('playerDB')) || [];
         let form = event.target.parentElement.parentElement.parentElement;
         let data = {};
+        let status = true;
 
         let ExistsPlayer = [];
 
@@ -238,18 +239,22 @@ document.addEventListener('DOMContentLoaded' , function () {
         }
 
         if(formtype == '2') {
-            let inputs = form.querySelectorAll('input[type="text"], input[type="number"], input:checked');
+            let inputs = form.querySelectorAll('input[type="text"], input[type="url"], input[type="number"], input:checked');
             inputs.forEach((input) => {
                 data[input.id] = input.value;
             });
+            console.log(data);
+            status = formValidation(data);
         }
         
-        if(!ExistsPlayer.includes(data.name)) {
-            storage.push(data);
-            localStorage.setItem('playerDB', JSON.stringify(storage));
-            createPlayerCard(data);
+        if(status) {
+            if(!ExistsPlayer.includes(data.name)) {
+                storage.push(data);
+                localStorage.setItem('playerDB', JSON.stringify(storage));
+                createPlayerCard(data);
+            }
         }
-        document.getElementById('modal').classList.add('hidden');
+        //document.getElementById('modal').classList.add('hidden');
     }
 
     function createPlayerCard(obj) {
@@ -320,7 +325,6 @@ document.addEventListener('DOMContentLoaded' , function () {
             </div>
         `;
         }
-        console.log("Here");
         playercontainer.insertAdjacentHTML('afterbegin', newCard);
     }
 
@@ -329,6 +333,83 @@ document.addEventListener('DOMContentLoaded' , function () {
             removePlayer(event);
         }
     });
+
+    function formValidation(data) {
+        let status = true;
+        let AlphabetPattern = /^[a-zA-Z\s]+$/;
+        let URLPattern = /^(https?:\/\/.*\.(?:png|jpg|webp))$/i;
+        let numbersPattern = /^\d{2}$/;
+
+        if (!AlphabetPattern.test(data.name)) {
+            status = false;
+            document.getElementById('ErrorName').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorName').classList.add('hidden');
+        }
+        console.log(data.photo);
+        console.log(URLPattern.test(data.photo));
+        if (!URLPattern.test(data.photo)) {
+            status = false;
+            document.getElementById('ErrorPhoto').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorPhoto').classList.add('hidden');
+        }
+
+        if (!AlphabetPattern.test(data.nationality)) {
+            status = false;
+            document.getElementById('ErrorNational').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorNational').classList.add('hidden');
+        }
+
+        if (!URLPattern.test(data.flag)) {
+            status = false;
+            document.getElementById('ErrorFlag').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorFlag').classList.add('hidden');
+        }
+
+        if (!AlphabetPattern.test(data.club)) {
+            status = false;
+            document.getElementById('ErrorClub').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorClub').classList.add('hidden');
+        }
+
+        if (!URLPattern.test(data.logo)) {
+            status = false;
+            document.getElementById('ErrorLogo').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorLogo').classList.add('hidden');
+        }
+
+        if (!numbersPattern.test(data.rating)) {
+            status = false;
+            document.getElementById('ErrorRating').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorRating').classList.add('hidden');
+        }
+
+        if(document.getElementById('playerType').value == '0') {
+            status = false;
+            document.getElementById('ErrorSelect').classList.remove('hidden');
+        } else {
+            document.getElementById('ErrorSelect').classList.add('hidden');
+        }
+
+        let stats = document.querySelectorAll('[name="stats"]');
+        stats.forEach((stat) => {
+            let num = parseInt(stat.value);
+            if(!numbersPattern.test(num)) {
+                status = false;
+                document.getElementById('stats').classList.remove('hidden');
+            } else {
+                document.getElementById('stats').classList.add('hidden');
+            }
+        });
+
+        return status;
+    }
 
     function removePlayer(event) {
         let storage = JSON.parse(localStorage.getItem('playerDB')) || []
