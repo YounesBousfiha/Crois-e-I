@@ -338,8 +338,11 @@ document.addEventListener('DOMContentLoaded' , function () {
     }
 
     // Write a Function that Clear Inputs
-    function clearInputs(event) {
-        console.log('canceled!');
+    function clearInputs() {
+        let selectChoices = modal.querySelector('#sourceSelect');
+        selectChoices.selectedIndex = 0;
+        dynamicFields.innerHTML = '';
+        modal.classList.add('hidden');
     }
 
     document.getElementById('addNewPlayer').addEventListener('click', (event) => {
@@ -349,6 +352,9 @@ document.addEventListener('DOMContentLoaded' , function () {
 
         window.onclick =  (event) => {
             if(event.target == modal) {
+                let selectChoices = modal.querySelector('#sourceSelect');
+                selectChoices.selectedIndex = 0;
+                dynamicFields.innerHTML = '';
                 modal.classList.add('hidden');
             }
         }
