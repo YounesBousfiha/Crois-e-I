@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded' , function () {
 
     // TODO: Style de Error Message
     // TODO: Verification Complete d'application
+    // TODO : Code CleaUP
+
+    // TODO : Revision Global de Code Source
+    // TODO: revision de Code HTML/CSS
+    // TODO: Revision de DOM
+
+
     LoadFromLocalStorage();
 
     function LoadFromLocalStorage() {
@@ -243,7 +250,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         if(formtype == '2') {
             let inputs = form.querySelectorAll('input[type="text"], input[type="url"], input[type="number"], input:checked');
             inputs.forEach((input) => {
-                data['form'] = true;
                 data[input.id] = input.value;
             });
 
@@ -297,7 +303,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         `;
         } else {
             newCard = `
-            <div id="${obj.form ? 'ViaForm' : ''}" class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+            <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
                 <button id="remove" class="text-end text-2xl h-1 remove">&times</button>
                 <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                 <div class="p-2 space-y-1">
@@ -337,22 +343,6 @@ document.addEventListener('DOMContentLoaded' , function () {
             removePlayer(event);
         }
     });
-    
-    document.getElementById('ViaForm').addEventListener('click', (event) => modifiePlayer(event));
-
-
-    function modifiePlayer(event) {
-        let player = event.target.parentElement;
-        let playerPosition  = querySelector('.postion').textContent;
-        if(playerPosition == 'GK') {
-            // load it in form with inputs filled
-        } else {
-            // load it in form with inputs filled
-        }
-        // update it & validate
-        // send it back
-        // update LocalStorage*/
-    }
 
 
     function formValidation(data) {

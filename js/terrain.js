@@ -1,12 +1,3 @@
-// FEAT: add REGEX Validation
-
-//BUG: le joueur  doit etre ajouter seulment Une Fois
-// Verifie si les BTN sont Bien Travaillez
-// Verifier le Form
-// VErifier la responsivité
-
-
-
 function addToTerrain(event) {
     let modal = document.getElementById('modal');
     modal.classList.remove('hidden');
