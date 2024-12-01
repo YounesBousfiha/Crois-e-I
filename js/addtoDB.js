@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded' , function () {
 
+    // TODO: Style de Error Message
+    // TODO: Verification Complete d'application
     LoadFromLocalStorage();
 
     function LoadFromLocalStorage() {
@@ -241,9 +243,10 @@ document.addEventListener('DOMContentLoaded' , function () {
         if(formtype == '2') {
             let inputs = form.querySelectorAll('input[type="text"], input[type="url"], input[type="number"], input:checked');
             inputs.forEach((input) => {
+                data['form'] = true;
                 data[input.id] = input.value;
             });
-            console.log(data);
+
             status = formValidation(data);
         }
         
@@ -254,7 +257,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                 createPlayerCard(data);
             }
         }
-        //document.getElementById('modal').classList.add('hidden');
+        document.getElementById('modal').classList.add('hidden');
     }
 
     function createPlayerCard(obj) {
@@ -294,7 +297,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         `;
         } else {
             newCard = `
-            <div class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
+            <div id="${obj.form ? 'ViaForm' : ''}" class="w-44 h-72 bg-white rounded-lg shadow-md px-2 py-2 m-2 hover:scale-110 hover:duration-500 hover:shadow-lg hover:shadow-black">
                 <button id="remove" class="text-end text-2xl h-1 remove">&times</button>
                 <img src="${obj.photo}" alt="Player Image" class="w-full h-32 object-cover rounded-t-lg">
                 <div class="p-2 space-y-1">
@@ -326,6 +329,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         `;
         }
         playercontainer.insertAdjacentHTML('afterbegin', newCard);
+    
     }
 
     document.getElementById('playerContainer').addEventListener('click', function(event) {
@@ -333,6 +337,23 @@ document.addEventListener('DOMContentLoaded' , function () {
             removePlayer(event);
         }
     });
+    
+    document.getElementById('ViaForm').addEventListener('click', (event) => modifiePlayer(event));
+
+
+    function modifiePlayer(event) {
+        let player = event.target.parentElement;
+        let playerPosition  = querySelector('.postion').textContent;
+        if(playerPosition == 'GK') {
+            // load it in form with inputs filled
+        } else {
+            // load it in form with inputs filled
+        }
+        // update it & validate
+        // send it back
+        // update LocalStorage*/
+    }
+
 
     function formValidation(data) {
         let status = true;
