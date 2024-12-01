@@ -4,7 +4,6 @@ document.getElementById('burgerMenu').addEventListener('click', function() {
 });
 
 
-
 let openModalButton = document.getElementById('terrain');
 let playerPlaceholders = document.querySelectorAll('.player-placeholder');
 let closeModalButton = document.getElementById('closeModal');

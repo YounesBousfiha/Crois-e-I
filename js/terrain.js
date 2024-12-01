@@ -1,16 +1,10 @@
-// Refactoring : reDesign Expand player Card
-
 // FEAT: add REGEX Validation
 
-
-// FEAT: Add modifie BTN & Remove BTN ( remove from Formation ou From Remplassant);
-
-// BUG: chaque joueur doit etre en terrain ou en remplassant ou on database ( Separation des BaseDonner)
-// Plan D'action
-// Every Player inside the terrain should be in LocalStorage "inGame"
-// Every Player in changeDeck should be in LocalStorage "inChange"
-
 //BUG: le joueur  doit etre ajouter seulment Une Fois
+// Verifie si les BTN sont Bien Travaillez
+// Verifier le Form
+// VErifier la responsivité
+
 
 
 function addToTerrain(event) {
@@ -23,11 +17,29 @@ function addToTerrain(event) {
 
     let placeholders = [...selectedPlace.classList];
     let availablePosition = placeholders.filter(cls => allPositions.includes(cls));
-    
+    let ScannerTerrain = document.getElementById('terrain');
+    let playerinTerrain = [];
+    let playerRemplacant = [];
+
+    ScannerTerrain.querySelectorAll('div').forEach((div) => {
+        if(div.dataset.name) {
+            playerinTerrain.push(div.dataset.name);
+        }
+    });
+
+    let ChangePlayer = document.querySelectorAll('#remplace div');
+    ChangePlayer.forEach((div) => {
+        if(div.dataset.name) {
+            playerRemplacant.push(div.dataset.name);  
+        }
+    });
+
     playerContainer.innerHTML = ``;
     storage.forEach(player => {
         if(availablePosition.includes(player.position)) {
-            PlayerModal(player, playerContainer, event);
+            if(!playerinTerrain.includes(player.name) || playerRemplacant.includes(player.name)) {
+                PlayerModal(player, playerContainer, event);
+            }
         }
     });
 }
@@ -150,16 +162,15 @@ function addToPlay(event, originalEvent) {
         ChangeStorage.push(data);
 
         localStorage.setItem('remplacant', JSON.stringify(ChangeStorage));
-
-
     }
+
     if (placeHolder.querySelector('[data-name]')) {
         return;
     } 
 
     spans.remove();
+
     let newElement;
-    // PUT the Stats inside the Card
     if(card.dataset.position == 'GK') {
         newElement = `
         <div data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}"  data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}" data-diving="${card.dataset.diving}" data-handling="${card.dataset.handling}" data-kicking="${card.dataset.kicking}" data-reflexes="${card.dataset.reflexes}" data-speed="${card.dataset.speed}" data-positioning="${card.dataset.positioning}" class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-black p-4" onclick="expandPlayer(this)" data-name="${card.dataset.name}" data-rating="${card.dataset.rating}" data-photo="${card.dataset.photo}" data-position="${card.dataset.position}" data-flag="${card.dataset.flag}" data-logo="${card.dataset.logo}">
@@ -323,9 +334,12 @@ function expandPlayer(element) {
 
 
 function removeFromTerrain(event, placeHolder) {
+    console.log(event.target);
+    console.log(placeHolder.parentElement.id);
     document.getElementById('playerModal').remove();
     let cible = placeHolder.querySelector('[data-name]');
-    let ChangeStorage = JSON.parse(localStorage.getItem('remplacant'));
+
+    let ChangeStorage = JSON.parse(localStorage.getItem('remplacant')) || [];
     let temp = [];
 
     ChangeStorage.forEach((player) => {
@@ -334,6 +348,7 @@ function removeFromTerrain(event, placeHolder) {
         }
     });
     ChangeStorage = temp;
+
 
     localStorage.setItem('remplacant', JSON.stringify(ChangeStorage));
 
@@ -344,7 +359,7 @@ function removeFromTerrain(event, placeHolder) {
                         <path d="M18.6275 41.711L18.3137 41.0298C18.1146 41.1215 17.8854 41.1215 17.6863 41.0298L17.3726 41.711L17.6863 41.0298L1.18627 33.4311C0.920355 33.3087 0.75 33.0427 0.75 32.7499V8.7248C0.75 8.42506 0.928458 8.15411 1.20383 8.03575L17.7038 0.943648C17.8929 0.862375 18.1071 0.862375 18.2962 0.943648L34.7962 8.03575C35.0715 8.15411 35.25 8.42506 35.25 8.7248V32.7499C35.25 33.0427 35.0796 33.3087 34.8137 33.4311L18.3137 41.0298L18.6275 41.711Z" stroke="currentColor" stroke-width="1.5"></path>
                         <path d="M18 12v12m6-6H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                </span>`;
+                    </span>`;
 }
 
 
@@ -523,8 +538,6 @@ function swapPlayer(event, placeHolder) {
 
     parentOfOldPlayer.replaceChild(cloneTarget, OldPlayer);
     parentOfTargetPlayer.replaceChild(cloneOld, playerTarget);
-
-
 }
 
 
