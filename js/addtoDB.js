@@ -101,31 +101,31 @@ document.addEventListener('DOMContentLoaded' , function () {
                 <div class="grid grid-cols-2 overflow-auto h-96 max-md:flex max-md:flex-col max-sm:flex max-sm:flex-col">
                     <div class="flex flex-col">
                         <input id="name" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="fullname" type="text" placeholder="FullName">
-                        <span id="ErrorName" class="hidden">Error name</span>
+                        <span id="ErrorName" class="hidden text-xl text-bold text-red-600">Error name</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="photo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" id="photo" type="url" placeholder="photoURL">
-                        <span id="ErrorPhoto" class="hidden">Error photo</span>
+                        <span id="ErrorPhoto" class="hidden text-xl text-bold text-red-600">Error photo</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="nationality" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="nationality">
-                        <span id="ErrorNational" class="hidden">Error Nationality</span>
+                        <span id="ErrorNational" class="hidden text-xl text-bold text-red-600">Error Nationality</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="flag" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="url" placeholder="flag" >
-                        <span id="ErrorFlag" class="hidden">Flag Error</span>
+                        <span id="ErrorFlag" class="hidden text-xl text-bold text-red-600">Flag Error</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="club" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="text" placeholder="club" >
-                        <span id="ErrorClub" class="hidden">Club Error</span>
+                        <span id="ErrorClub" class="hidden text-xl text-bold text-red-600">Club Error</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="logo" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="url" placeholder="logoURL" >
-                        <span id="ErrorLogo" class="hidden">Logo Error</span>
+                        <span id="ErrorLogo" class="hidden text-xl text-bold text-red-600">Logo Error</span>
                     </div>
                     <div class="flex flex-col">
                         <input id="rating" class="px-2 rounded-lg border-2 w-96 h-16 text-2xl" type="number" placeholder="rating" >
-                        <span id="ErrorRating" class="hidden">Enter a rating</span>
+                        <span id="ErrorRating" class="hidden text-xl text-bold text-red-600">Enter a rating</span>
                     </div>
                     <div class="flex flex-col">
                         <select id="playerType" class="py-1 rounded-lg w-96 h-16 text-2xl">
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <option value="1">Joueur</option>
                             <option value="2">Gardient</option>
                         </select>
-                        <span id="ErrorSelect" class="hidden">Choisir Un type</span>
+                        <span id="ErrorSelect" class="hidden text-xl text-bold text-red-600">Choisir Un type</span>
                     </div>
                     <div id="stats-form" class="col-span-2 place-items-center">
                     </div>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <input id="dribbling" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="dribbling">
                             <input id="defending" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="defending">
                             <input id="physical" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="physical">
-                            <span id="stats" class="text-center hidden">remplir les stats</span>
+                            <span id="stats" class="text-center hidden text-xl text-bold text-red-600">remplir les stats</span>
                         </div>
                     `
                 } else if (this.value == '2') {
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded' , function () {
                             <input id="reflexes" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="reflexes">
                             <input id="speed" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="speed">
                             <input id="positioning" name="stats" class="border-2 rounded-lg px-2 w-44  text-2xl" type="number" min="0" max="99" step="1" placeholder="positioning">
-                            <span id="stats" class="hidden">remplir les stats</span>
+                            <span id="stats" class="hidden text-xl text-bold text-red-600">remplir les stats</span>
                         </div>
                     `
                 }             
@@ -261,9 +261,9 @@ document.addEventListener('DOMContentLoaded' , function () {
                 storage.push(data);
                 localStorage.setItem('playerDB', JSON.stringify(storage));
                 createPlayerCard(data);
+                document.getElementById('modal').classList.add('hidden');
             }
         }
-        document.getElementById('modal').classList.add('hidden');
     }
 
     function createPlayerCard(obj) {
