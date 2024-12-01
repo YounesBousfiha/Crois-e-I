@@ -312,6 +312,7 @@ function expandPlayer(element) {
     document.body.insertAdjacentHTML('beforeend', playerDetails);
     
     let placeholder = event.target.parentElement;
+
     document.getElementById('ChangePlayer').addEventListener('click',  (event) => changePlayers(event, placeholder));
     document.getElementById('RemovePlayer').addEventListener('click', (event) => removeFromTerrain(event, placeholder));
 
@@ -463,24 +464,67 @@ function changePlayers(event, placeHolder) {
 
     changeModal.classList.remove('hidden');
 
-
-    // Load from LocalStorage (remplacement);
-    // select a player
-    // swap the new Player & the old Player data
-    // update the localStorage
-    console.log(placeHolder);
-
     document.getElementById('closeChangeModal').addEventListener('click', () => {
         changeModal.classList.add('hidden');
     });
 }
 
 function swapPlayer(event, placeHolder) {
+    let remplacantStorage = JSON.parse(localStorage.getItem('remplacant')) || [];
+    let temp = [];
     let newPlayer = event.target.parentElement.parentElement;
     let OldPlayer = placeHolder.querySelector('[data-name]');
 
-    console.log(newPlayer);
-    console.log(OldPlayer);
+    let remplasantContainer = document.getElementById('remplace');
+    let playerTarget = remplasantContainer.querySelector(`[data-name="${newPlayer.dataset.name}"]`);
+
+    let parentOfOldPlayer = OldPlayer.parentElement;
+    let parentOfTargetPlayer = playerTarget.parentElement;
+
+    let cloneTarget = playerTarget.cloneNode(true);
+    let cloneOld = OldPlayer.cloneNode(true);
+
+    remplacantStorage.forEach((player) => {
+        if(player.name == OldPlayer.dataset.name) {
+            player.name = OldPlayer.dataset.name,
+            player.position = OldPlayer.dataset.position,
+            player.rating = OldPlayer.dataset.rating,
+            player.flag = OldPlayer.dataset.flag,
+            player.logo = OldPlayer.dataset.logo,
+            player.photo = OldPlayer.dataset.photo,
+            player.diving = OldPlayer.dataset.diving,
+            player.handling = OldPlayer.dataset.handling,
+            player.kicking = OldPlayer.dataset.kicking,
+            player.reflexes = OldPlayer.dataset.reflexes,
+            player.speed = OldPlayer.dataset.speed,
+            player.positioning = OldPlayer.dataset.positioning
+        } else {
+            player.name = OldPlayer.dataset.name,
+            player.position = OldPlayer.dataset.position,
+            player.rating = OldPlayer.dataset.rating,
+            player.flag = OldPlayer.dataset.flag,
+            player.logo = OldPlayer.dataset.logo,
+            player.photo = OldPlayer.dataset.photo,
+            player.pace = OldPlayer.dataset.pace,
+            player.shooting = OldPlayer.dataset.shooting,
+            player.passing = OldPlayer.dataset.passing,
+            player.dribbling = OldPlayer.dataset.dribbling,
+            player.defending = OldPlayer.dataset.defending,
+            player.physical = OldPlayer.dataset.physical
+        }
+
+        temp.push(player);
+
+        });
+
+    remplacantStorage = temp;
+
+    localStorage.setItem('remplacant', JSON.stringify(remplacantStorage));
+
+    parentOfOldPlayer.replaceChild(cloneTarget, OldPlayer);
+    parentOfTargetPlayer.replaceChild(cloneOld, playerTarget);
+
+
 }
 
 
