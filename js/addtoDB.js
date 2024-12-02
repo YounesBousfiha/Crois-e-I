@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded' , function () {
         let formtype = document.getElementById('sourceSelect').value;
         let storage = JSON.parse(localStorage.getItem('playerDB')) || [];
         let form = event.target.parentElement.parentElement.parentElement;
+
         let data = {};
         let status = true;
 
@@ -345,7 +346,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         }
     });
 
-
     function formValidation(data) {
         let status = true;
         let AlphabetPattern = /^[a-zA-Z\s]+$/;
@@ -358,8 +358,6 @@ document.addEventListener('DOMContentLoaded' , function () {
         } else {
             document.getElementById('ErrorName').classList.add('hidden');
         }
-        console.log(data.photo);
-        console.log(URLPattern.test(data.photo));
         if (!URLPattern.test(data.photo)) {
             status = false;
             document.getElementById('ErrorPhoto').classList.remove('hidden');
